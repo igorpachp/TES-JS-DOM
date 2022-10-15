@@ -4,9 +4,11 @@ const mainBlock = createMainBlock();
 
 // buttons
 const incButton = createIncButton();
+const resetButton = createResetButton();
 
 // variables
 let numberOfCircles = 0;
+let hiddenStack = []; // stack keeping hidden circles
 
 function createMainBlock() {
     const mainBlock = document.createElement("div");
@@ -36,6 +38,16 @@ function createIncButton() {
     return incButton;
 }
 
+function createResetButton() {
+    const rButton = document.createElement("button");
+    rButton.innerHTML = "reset circles";
+    rButton.onclick = () => {resetCirclesDisplay()};
+
+    buttonsBlock.appendChild(rButton);
+
+    return rButton;
+}
+
 function increaseCircleCount(){
     createCircle();
     numberOfCircles++;
@@ -60,6 +72,14 @@ function createCircle() {
     return newCircle;
 }
 
-function hide_circle(element){
+function hide_circle(element) {
     element.style.display = "none";
+    hiddenStack.push(element);
 };
+
+function resetCirclesDisplay() {
+    while (hiddenStack.length > 0) {
+        element = hiddenStack.pop();
+        element.style.display = 'block';
+    }
+}
