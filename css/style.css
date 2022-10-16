@@ -18,9 +18,10 @@ body {
     flex-direction: column;
     justify-content: center;
     width: 180px;
-    max-height: 360px;
+    height: 360px;
     position: sticky;
     top: 35%;
+    margin: 32px;
     border-radius: 16px;
     box-shadow: 0 0 16px black;
 }
