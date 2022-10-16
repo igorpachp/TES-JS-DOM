@@ -1,6 +1,45 @@
+body {
+    display: flex;
+    margin: 0 64px;
+    background-color: #333333;
+}
+
 #main {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    max-width: 960px;
+    padding: 24px;
+    margin: auto;
+}
+
+#buttons, #msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 180px;
+    max-height: 360px;
+    position: sticky;
+    top: 35%;
+    border-radius: 16px;
+    box-shadow: 0 0 16px black;
+}
+
+#msg {
+}
+
+p {
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: antiquewhite;
+    margin: 32px 8px;
+    opacity: 100%;
+}
+
+button {
+    margin: 16px;
+    padding: 8px 16px;
 }
 
 .circle {
