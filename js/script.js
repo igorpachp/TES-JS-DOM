@@ -1,6 +1,7 @@
 // container divs
 const buttonsBlock = createButtonsBlock();
 const mainBlock = createMainBlock();
+const msgBlock = createMessageBlock();
 
 // buttons
 const incButton = createIncButton();
@@ -10,6 +11,8 @@ const decButton =  createDecButton();
 // variables
 let numberOfCircles = 0;
 let hiddenStack = []; // stack keeping hidden circles
+
+updateMsg();
 
 // creating container divs
 function createMainBlock() {
@@ -30,12 +33,21 @@ function createButtonsBlock() {
     return buttonsDiv;
 }
 
+function createMessageBlock() {
+    const msgBlock = document.createElement("div");
+
+    msgBlock.id = "msg";
+    document.body.appendChild(msgBlock);
+
+    return msgBlock;
+}
+
 // creating buttons
 function createIncButton() {
     const incButton = document.createElement("button");
+
     incButton.innerHTML = "+1 circle";
     incButton.onclick = () => {increaseCircleCount()};
-
     buttonsBlock.appendChild(incButton);
 
     return incButton;
@@ -43,9 +55,9 @@ function createIncButton() {
 
 function createResetButton() {
     const rButton = document.createElement("button");
+
     rButton.innerHTML = "reset circles";
     rButton.onclick = () => {resetCirclesDisplay()};
-
     buttonsBlock.appendChild(rButton);
 
     return rButton;
@@ -53,9 +65,9 @@ function createResetButton() {
 
 function createDecButton() {
     const decButton = document.createElement("button");
+
     decButton.innerHTML = "-1 circle";
     decButton.onclick = () => {decreaseCircleCount()};
-
     buttonsBlock.appendChild(decButton);
 
     return decButton;
@@ -66,7 +78,8 @@ function createDecButton() {
 function increaseCircleCount(){
     createCircle();
     numberOfCircles++;
-};
+    updateMsg();
+}
 
 // this function is responsible for 
 // actually creating the new circle
@@ -97,7 +110,8 @@ function createCircle() {
 function hide_circle(element) {
     element.style.display = "none";
     hiddenStack.push(element);
-};
+    updateMsg();
+}
 
 // this function removes all circles from the 
 // stack of hidden elements, making them visible again
@@ -106,6 +120,7 @@ function resetCirclesDisplay() {
         element = hiddenStack.pop();
         element.style.display = 'block';
     }
+    updateMsg();
 }
 
 // this function decreases the number of circles
@@ -128,4 +143,33 @@ function decreaseCircleCount(){
         mainBlock.removeChild(element);
         numberOfCircles--;
     }
+
+    updateMsg();
+}
+
+// this function updates the information about
+// how many circles are visible and hidden
+// after interaction with buttons and circles
+function updateMsg() {
+    circleCountStr = "Number of circles: " + numberOfCircles;
+    visibleCountStr = "Number of visible circles: " + (numberOfCircles - hiddenStack.length);
+    hiddenCountStr = "Number of hidden circles: " + hiddenStack.length;
+
+    div = document.createElement('div');
+
+    countP = document.createElement('p');
+    countP.innerHTML = circleCountStr;
+    div.appendChild(countP);
+
+    visibleP = document.createElement('p');
+    visibleP.innerHTML = visibleCountStr;
+    div.appendChild(visibleP);
+    
+    hiddenP = document.createElement('p');
+    hiddenP.innerHTML = hiddenCountStr;
+    div.appendChild(hiddenP);
+
+    if(msgBlock.firstChild)
+        document.getElementById("msg").removeChild(msgBlock.firstChild);
+    msgBlock.appendChild(div);
 };
