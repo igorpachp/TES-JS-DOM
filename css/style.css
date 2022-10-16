@@ -21,7 +21,7 @@ body {
     height: 360px;
     position: sticky;
     top: 35%;
-    margin: 32px;
+    margin: 32px 0;
     border-radius: 16px;
     box-shadow: 0 0 16px black;
 }
